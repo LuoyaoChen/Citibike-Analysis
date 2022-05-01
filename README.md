@@ -34,9 +34,9 @@ The procedure includes the follows:
 ```
 2. **Cluster** the stations using kmeans clustering.
 3. Define station **"Inbalancenesss"** as the inbound - outbound per 2 hour window.
-4. Build **transition matrix A** every 2 hours. Within each matrix, entry $A_{i,j}$ denotes the number of bikes depart from i to j within this 2 hour chunk.
+4. Build **transition matrix A** every 2 hours. Within each matrix, entry A_{i,j} denotes the number of bikes depart from i to j within this 2 hour chunk.
 5. **Reconstruct** matrix A for every 2 hours based on the cluters in order to reduce matrix sparcity.
-6. Build two **models(baseline and RNN)** to $\mapsto$ $6\times6$ matrix to $1\times6$ vector for every 2 hours.
+6. Build two **models(baseline and RNN)** to \mapsto 6\times 6 matrix to 1\times 6 vector for every 2 hours.
 
 
 ## Flowchart

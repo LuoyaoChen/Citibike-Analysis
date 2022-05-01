@@ -14,6 +14,6 @@ Model/
 
 ```
 
-## Project Procedure
+## Project Flowchart
 
 ![overflow.png](Overflow.png)

@@ -18,7 +18,7 @@ Model/
 ```
 ## Project Overview and Methods
 ### Overview
-The goal of the Citibike analysis is to use the citibike data publised at https://s3.amazonaws.com/tripdata/index.html for the year of 2021, and build prediction models to predict the cluster-imbalanceness for every 2 hours.
+The goal of the Citibike analysis is to use the [citibike data](https://s3.amazonaws.com/tripdata/index.html) publised at  for the year of 2021, and build prediction models to predict the cluster-imbalanceness for every 2 hours.
 
 ### Methods
 The procedure includes the follows:
@@ -36,7 +36,7 @@ The procedure includes the follows:
 3. Define station **"Inbalancenesss"** as the inbound - outbound per 2 hour window.
 4. Build **transition matrix A** every 2 hours. Within each matrix, entry A_{i,j} denotes the number of bikes depart from i to j within this 2 hour chunk.
 5. **Reconstruct** matrix A for every 2 hours based on the cluters in order to reduce matrix sparcity.
-6. Build two **models(baseline and RNN)** to \mapsto 6\times 6 matrix to 1\times 6 vector for every 2 hours.
+6. Build two **models(baseline and RNN)** to $\mapsto$ 6$\cross$ 6 matrix to 1\times 6 vector for every 2 hours.
 
 
 ## Flowchart

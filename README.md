@@ -23,7 +23,7 @@ The goal of the Citibike analysis is to use the citibike data publised at https:
 ### Methods
 The procedure includes the follows:
 
-1. Preprocess the data: delete data such as those
+1. **Preprocess** the data: exclude data such as those
  ```                    contains any nulls; 
                         
                         ride duration > 24 hours (i.e. start and end on dfferent dates);
@@ -32,11 +32,11 @@ The procedure includes the follows:
                         
                         ect..
 ```
-2. Cluster the stations using kmeans clustering.
-3. Define station "Inbalancenesss" as the inbound - outbound per 2 hour window.
-4. Build transition matrix every 2 hours. Within each matrix, entry $A_{i,j}$ denotes the number of bikes depart from i to j within this 2 hour chunk.
-5. Cluter the stations to reduce matrix sparcity.
-6. Build two models(baseline and RNN) to $\mapsto$ $6\times6$ matrix to $1\times6$ vector for every 2 hours.
+2. **Cluster** the stations using kmeans clustering.
+3. Define station **"Inbalancenesss"** as the inbound - outbound per 2 hour window.
+4. Build **transition matrix A** every 2 hours. Within each matrix, entry $A_{i,j}$ denotes the number of bikes depart from i to j within this 2 hour chunk.
+5. **Reconstruct** matrix A for every 2 hours based on the cluters in order to reduce matrix sparcity.
+6. Build two **models(baseline and RNN)** to $\mapsto$ $6\times6$ matrix to $1\times6$ vector for every 2 hours.
 
 
 ## Flowchart

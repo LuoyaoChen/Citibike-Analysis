@@ -2,9 +2,10 @@
 ## Code Documentations
 ```
 preprocess/
-   --
-   -- 
-   --
+   -- step0_download.ipynb: download dataset with serial method and multithreading method
+   -- step1_DataCleaning.ipynb: data cleaning with serial method and multiprocessing method
+   -- step2_ClusteringAndPlot.ipynb: cluster the stations to 6 groups based on geographical information and plot the location of the stations on the map
+   -- step3_DataTransformation.ipynb: generate 6*6 matrices for every two-hour chunk of data
 Model/
   - baseline.ipynb: code for baseline tree
   - RNN/ 

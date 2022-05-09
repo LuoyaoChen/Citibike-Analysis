@@ -10,7 +10,7 @@ from tqdm import tqdm
 from torch.nn import DataParallel
 from torch.nn import MSELoss
 # from model import CityBike_Model
-from model_RNN_only import CityBike_Model
+from model import CityBike_Model
 from torch import optim
 
 # tensorboard
@@ -74,7 +74,7 @@ def train(device,device_ids,
             print(f"iter = {iter}, epoch: {epoch}, loss: {loss.item()}")
             writer.add_scalar('loss(MSE)', loss, iter)
          
-         if iter % 1000 ==0:
+         if iter % 100 ==0:
             print(f"saving model CityBike_Model_iter_{iter}.pt to dir: {model_output_dir}...")
             torch.save(model.module.state_dict(), os.path.join(model_output_dir, f'CityBike_Model_iter_{iter}.pt'))
             # torch.save(model.stat_dict(), os.path.join(model_output_dir, f'CityBike_Model_iter{iter}.pt'))
@@ -89,15 +89,15 @@ def train(device,device_ids,
 
 if __name__ == "__main__":
 #  os.environ["CUDA_VISIBLE_DEVICES"]="0"
-   note = 'month_3_after'
-   device_ids = [1,2]
+   note = '3k_iter'
+   device_ids = [2,1]
    device = torch.device('cuda', device_ids[0])
 
    # seeds
    torch.manual_seed(3001)
 
    # dataset pram
-   datafolder_dir = '/mnt/NAS/home/Luoyao/citibike/datafolder'
+   datafolder_dir = '/mnt/NAS/home/Luoyao/citibike/datafolder/train'
    
    # train param
    batch_size = 32

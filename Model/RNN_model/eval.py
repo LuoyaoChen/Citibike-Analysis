@@ -13,8 +13,13 @@ from model import CityBike_Model
 
 # tensorboard
 from torch.utils.tensorboard import SummaryWriter
+# txt write
+import json
 
-def eval(device, datafolder_dir, batch_size, pretrained_model_dir,tensorboard_dir):
+def eval(device, tensorboard_dir, datafolder_dir, 
+        batch_size, pretrained_model_dir, 
+        txt_dir):
+   f = open(txt_dir, 'w')
    ## DATASET
    eval_data = CityBikeDataset(datafolder_dir)
    print(f"Dataset created, len = {len(eval_data)}!....")
@@ -42,7 +47,7 @@ def eval(device, datafolder_dir, batch_size, pretrained_model_dir,tensorboard_di
             
             ## FIT MODEL
             out = model(one_day)
-            print("out.shape : ", out.shape)
+            # print("out.shape : ", out.shape)
             
             ## LOSS 
             criterion= MSELoss()
@@ -51,21 +56,30 @@ def eval(device, datafolder_dir, batch_size, pretrained_model_dir,tensorboard_di
             print(f"idx: {idx}, loss: {loss.item()}")
             writer.add_scalar(f'test_loss(MSE)_model_{model_dir}', loss.detach(), idx)
       print(f"sum = {sum}, iter= {idx+1}, average MSE = {sum / (idx+1)}")
-      sum_dict[model_dir]=sum / (idx+1)
-   print(sum_dict)
+      sum_dict[model_dir]=sum.item()/ (idx+1)
+   new_dict = {k: v for k, v in sorted(sum_dict.items(), key=lambda item: item[1])}
+   # f.write(json.dumps(new_dict))
+   for key, value in new_dict.items(): 
+      f.write(f'{key} : {value} \n')
+   print(new_dict)
    
 
 if __name__ == "__main__":
 #  os.environ["CUDA_VISIBLE_DEVICES"]="0"
- device = torch.device('cuda', 1)
- note = '3k_iter'
- 
- tensorboard_dir = f'/mnt/NAS/home/Luoyao/citibike/experiments/{note}/tensorboard_runs'
- # dataset pram
- datafolder_dir = '/mnt/NAS/home/Luoyao/citibike/datafolder'
- 
- # train param
- batch_size = 32
- # pretrained model path
- pretrained_model_dir = '/mnt/NAS/home/Luoyao/citibike/experiments/{note}/trains'
- eval(device, datafolder_dir, batch_size, pretrained_model_dir, tensorboard_dir)
+   device = torch.device('cuda', 2)
+   note = '3k_iter'
+   
+   tensorboard_dir = f'/mnt/NAS/home/Luoyao/citibike/experiments/{note}/tensorboard_runs'
+   # dataset pram
+   datafolder_dir = '/mnt/NAS/home/Luoyao/citibike/datafolder/test'
+   
+   # train param
+   batch_size = 31
+   # pretrained model path
+   pretrained_model_dir = f'/mnt/NAS/home/Luoyao/citibike/experiments/{note}/trains'
+   
+   txt_dir = f'/mnt/NAS/home/Luoyao/citibike/experiments/{note}/test.txt'
+
+   eval(device, tensorboard_dir, datafolder_dir, 
+        batch_size, pretrained_model_dir, 
+        txt_dir)

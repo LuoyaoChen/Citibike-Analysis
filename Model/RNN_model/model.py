@@ -49,7 +49,8 @@ class RNN(nn.Module):
  
  
 class CityBike_Model(nn.Module):
- def __init__(self, device, gcn_in_dim, gcn_hid_dim, gcn_out_dim, gcn_dropout,
+ def __init__(self, device, 
+              gcn_in_dim, gcn_hid_dim, gcn_out_dim, gcn_dropout,
               rnn_in_features, rnn_hidden_features, rnn_out_features, 
               final_outfeatures =6):
      super().__init__()
@@ -64,7 +65,7 @@ class CityBike_Model(nn.Module):
      out = self.rnn(out)
     #  print("after RNN: out.shape: ", out.shape) # after RNN: out.shape:  torch.Size([32, 11, 6])
     #  print("out.dtype: ", out.dtype) # out.dtype:  torch.float32 ->   torch.float64
-     out = self.mlp(out).double()
+     out = self.mlp(out)#.double()
      return out
    
 
